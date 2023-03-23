@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CalculadoraController } from './calculadora/calculadora.controller';
-import { CalculadoraService } from './calculadora/calculadora.service';
+import { CalculadoraModule } from './calculadora/calculadora.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),
@@ -16,8 +15,9 @@ import { CalculadoraService } from './calculadora/calculadora.service';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    CalculadoraModule,
   ],
-  controllers: [CalculadoraController],
-  providers: [CalculadoraService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
