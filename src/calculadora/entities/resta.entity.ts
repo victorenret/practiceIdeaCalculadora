@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Suma {
+export class Resta {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

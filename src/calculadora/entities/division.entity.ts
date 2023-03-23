@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Suma {
+export class Division {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -11,6 +11,6 @@ export class Suma {
   @Column('numeric')
   n2: number;
 
-  @Column('float')
+  @Column('numeric')
   result: number;
 }
