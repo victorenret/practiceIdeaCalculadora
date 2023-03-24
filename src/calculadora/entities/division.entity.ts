@@ -1,16 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsNumber } from 'class-validator';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Division {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
-  @Column('numeric')
+  @IsNumber()
+  @Column()
   n1: number;
 
-  @Column('numeric')
+  @Column()
+  @IsNumber()
   n2: number;
 
-  @Column('numeric')
-  result: number;
+  @Column()
+  @IsNumber()
+  resultado: number;
 }
