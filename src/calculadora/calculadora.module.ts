@@ -5,12 +5,10 @@ import { CalculadoraService } from './calculadora.service';
 
 import { Resta } from './entities/resta.entity';
 import { Suma } from './entities/suma.entity';
-import { Multiplicacion } from './entities/multiplicacion.entity';
-import { Division } from './entities/division.entity';
 
 @Module({
   // imports: [TypeOrmModule.forFeature([Suma, Resta, Multipliacion, Division])],
-  imports: [TypeOrmModule.forFeature([Suma, Resta, Multiplicacion, Division])],
+  imports: [TypeOrmModule.forFeature([Suma, Resta])],
   controllers: [CalculadoraController],
   providers: [CalculadoraService],
 })

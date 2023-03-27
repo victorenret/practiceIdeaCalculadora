@@ -17,11 +17,11 @@ export class CalculadoraController {
     return suma;
   }
 
-  // @Post('resta')
-  // async createRes(@Body() sumaData: Suma): Promise<Suma> {
-  //   const suma = await this.calculadoraService.createRes(sumaData);
-  //   return suma;
-  // }
+  @Post('resta')
+  async createRes(@Body() sumaData: Suma): Promise<Suma> {
+    const suma = await this.calculadoraService.createRes(sumaData);
+    return suma;
+  }
 
   // @Post('multiplicacion')
   // async createMulti(@Body() sumaData: Suma): Promise<Suma> {
