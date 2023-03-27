@@ -17,11 +17,25 @@ export class CalculadoraService {
   ) {}
 
   async createSum(sumaData: Suma): Promise<Suma> {
-    const id = uuidv4();
-    const suma = { id, ...sumaData };
+    const suma = new Suma();
 
-    console.log(suma.resultado);
-    return await this.sumaRepository.save(suma);
+    const id = uuidv4();
+    const resultado = sumaData.n1 + sumaData.n2;
+
+    suma.n1 = sumaData.n1;
+    suma.n2 = sumaData.n2;
+    suma.resultado = resultado;
+
+    await this.sumaRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Suma)
+      .values([
+        { id: id, n1: sumaData.n1, n2: sumaData.n2, resultado: resultado },
+      ])
+      .execute();
+
+    return suma;
   }
 
   // suma(n1: number, n2: number): string {
