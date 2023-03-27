@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Suma } from './entities/suma.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { Resta } from './entities/resta.entity';
 
 @Injectable()
 export class CalculadoraService {
@@ -14,6 +15,8 @@ export class CalculadoraService {
   constructor(
     @InjectRepository(Suma)
     private sumaRepository: Repository<Suma>,
+    @InjectRepository(Suma)
+    private restaRepository: Repository<Resta>,
   ) {}
 
   async createSum(sumaData: Suma): Promise<Suma> {
@@ -36,6 +39,28 @@ export class CalculadoraService {
       .execute();
 
     return suma;
+  }
+
+  async createRes(restaData: Resta): Promise<Resta> {
+    const resta = new Resta();
+
+    const id = uuidv4();
+    const resultado = restaData.n1 - restaData.n2;
+
+    resta.n1 = restaData.n1;
+    resta.n2 = restaData.n2;
+    resta.resultado = resultado;
+
+    await this.sumaRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Resta)
+      .values([
+        { id: id, n1: restaData.n1, n2: restaData.n2, resultado: resultado },
+      ])
+      .execute();
+
+    return resta;
   }
 
   // suma(n1: number, n2: number): string {
