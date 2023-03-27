@@ -1,30 +1,39 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { OperacionesDto } from './dtos/operaciones.dto';
 import { CalculadoraService } from './calculadora.service';
+import { Suma } from './entities/suma.entity';
 
 @Controller('calculadora')
 export class CalculadoraController {
   constructor(private calculadoraService: CalculadoraService) {}
 
+  // @Post('suma')
+  // sumar(@Body() operacionesDto: OperacionesDto) {
+  //   return this.calculadoraService.suma(operacionesDto);
+  // }
+
   @Post('suma')
-  sumar(@Body() nums: OperacionesDto) {
-    return this.calculadoraService.suma(nums.num1, nums.num2);
+  async createSum(@Body() sumaData: Suma): Promise<Suma> {
+    const suma = await this.calculadoraService.createSum(sumaData);
+    return suma;
   }
 
-  @Post('resta')
-  restar(@Body() nums: OperacionesDto) {
-    return this.calculadoraService.resta(nums.num1, nums.num2);
-  }
+  // @Post('resta')
+  // async createRes(@Body() sumaData: Suma): Promise<Suma> {
+  //   const suma = await this.calculadoraService.createRes(sumaData);
+  //   return suma;
+  // }
 
-  @Post('multiplicacion')
-  multiplicar(@Body() nums: OperacionesDto) {
-    return this.calculadoraService.multiplicacion(nums.num1, nums.num2);
-  }
+  // @Post('multiplicacion')
+  // async createMulti(@Body() sumaData: Suma): Promise<Suma> {
+  //   const suma = await this.calculadoraService.createMulti(sumaData);
+  //   return suma;
+  // }
 
-  @Post('division')
-  dividir(@Body() nums: OperacionesDto) {
-    return this.calculadoraService.division(nums.num1, nums.num2);
-  }
+  // @Post('division')
+  // async createDivi(@Body() sumaData: Suma): Promise<Suma> {
+  //   const suma = await this.calculadoraService.createDivi(sumaData);
+  //   return suma;
+  // }
 
   @Get('obsumas')
   findAllSum(): number[] {
