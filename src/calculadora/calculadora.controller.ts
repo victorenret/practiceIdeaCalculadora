@@ -1,5 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CalculadoraService } from './calculadora.service';
+import { Multiplicacion } from './entities/multiplicacion.entity';
+import { Resta } from './entities/resta.entity';
 import { Suma } from './entities/suma.entity';
 
 @Controller('calculadora')
@@ -18,16 +20,18 @@ export class CalculadoraController {
   }
 
   @Post('resta')
-  async createRes(@Body() sumaData: Suma): Promise<Suma> {
-    const suma = await this.calculadoraService.createRes(sumaData);
-    return suma;
+  async createRes(@Body() restaData: Resta): Promise<Resta> {
+    const resta = await this.calculadoraService.createRes(restaData);
+    return resta;
   }
 
-  // @Post('multiplicacion')
-  // async createMulti(@Body() sumaData: Suma): Promise<Suma> {
-  //   const suma = await this.calculadoraService.createMulti(sumaData);
-  //   return suma;
-  // }
+  @Post('multiplicacion')
+  async createMulti(
+    @Body() multiData: Multiplicacion,
+  ): Promise<Multiplicacion> {
+    const suma = await this.calculadoraService.createMulti(multiData);
+    return suma;
+  }
 
   // @Post('division')
   // async createDivi(@Body() sumaData: Suma): Promise<Suma> {
