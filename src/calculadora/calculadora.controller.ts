@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CalculadoraService } from './calculadora.service';
+import { Division } from './entities/division.entity';
 import { Multiplicacion } from './entities/multiplicacion.entity';
 import { Resta } from './entities/resta.entity';
 import { Suma } from './entities/suma.entity';
@@ -33,11 +34,11 @@ export class CalculadoraController {
     return suma;
   }
 
-  // @Post('division')
-  // async createDivi(@Body() sumaData: Suma): Promise<Suma> {
-  //   const suma = await this.calculadoraService.createDivi(sumaData);
-  //   return suma;
-  // }
+  @Post('division')
+  async createDivi(@Body() diviData: Division): Promise<Division> {
+    const divi = await this.calculadoraService.createDivi(diviData);
+    return divi;
+  }
 
   @Get('obsumas')
   findAllSum(): number[] {

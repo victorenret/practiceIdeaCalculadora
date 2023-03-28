@@ -5,6 +5,7 @@ import { Suma } from './entities/suma.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { Resta } from './entities/resta.entity';
 import { Multiplicacion } from './entities/multiplicacion.entity';
+import { Division } from './entities/division.entity';
 
 @Injectable()
 export class CalculadoraService {
@@ -20,6 +21,8 @@ export class CalculadoraService {
     private restaRepository: Repository<Resta>,
     @InjectRepository(Multiplicacion)
     private multiRepository: Repository<Multiplicacion>,
+    @InjectRepository(Division)
+    private diviRepository: Repository<Division>,
   ) {}
 
   async createSum(sumaData: Suma): Promise<Suma> {
@@ -66,7 +69,7 @@ export class CalculadoraService {
     return resta;
   }
 
-  async createMulti(multiData: Multiplicacion): Promise<Resta> {
+  async createMulti(multiData: Multiplicacion): Promise<Multiplicacion> {
     const multi = new Multiplicacion();
 
     const id = uuidv4();
@@ -86,6 +89,28 @@ export class CalculadoraService {
       .execute();
 
     return multi;
+  }
+
+  async createDivi(diviData: Division): Promise<Division> {
+    const divi = new Division();
+
+    const id = uuidv4();
+    const resultado = diviData.n1 / diviData.n2;
+
+    divi.n1 = diviData.n1;
+    divi.n2 = diviData.n2;
+    divi.resultado = resultado;
+
+    await this.diviRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Division)
+      .values([
+        { id: id, n1: diviData.n1, n2: diviData.n2, resultado: resultado },
+      ])
+      .execute();
+
+    return divi;
   }
 
   // suma(n1: number, n2: number): string {
