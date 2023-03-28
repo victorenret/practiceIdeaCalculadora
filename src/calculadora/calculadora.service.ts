@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Suma } from './entities/suma.entity';
 import { v4 as uuidv4 } from 'uuid';
-import { Resta } from './entities/resta.entity';
-import { Multiplicacion } from './entities/multiplicacion.entity';
-import { Division } from './entities/division.entity';
+import { Suma, Resta, Multiplicacion, Division } from './entities';
 
 @Injectable()
 export class CalculadoraService {

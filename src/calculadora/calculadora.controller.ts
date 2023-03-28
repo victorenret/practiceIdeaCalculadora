@@ -1,9 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CalculadoraService } from './calculadora.service';
-import { Division } from './entities/division.entity';
-import { Multiplicacion } from './entities/multiplicacion.entity';
-import { Resta } from './entities/resta.entity';
-import { Suma } from './entities/suma.entity';
+import { Division, Multiplicacion, Resta, Suma } from './entities';
 
 @Controller('calculadora')
 export class CalculadoraController {
