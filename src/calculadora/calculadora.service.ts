@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Suma } from './entities/suma.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { Resta } from './entities/resta.entity';
+import { Multiplicacion } from './entities/multiplicacion.entity';
 
 @Injectable()
 export class CalculadoraService {
@@ -15,8 +16,10 @@ export class CalculadoraService {
   constructor(
     @InjectRepository(Suma)
     private sumaRepository: Repository<Suma>,
-    @InjectRepository(Suma)
+    @InjectRepository(Resta)
     private restaRepository: Repository<Resta>,
+    @InjectRepository(Multiplicacion)
+    private multiRepository: Repository<Multiplicacion>,
   ) {}
 
   async createSum(sumaData: Suma): Promise<Suma> {
@@ -51,7 +54,7 @@ export class CalculadoraService {
     resta.n2 = restaData.n2;
     resta.resultado = resultado;
 
-    await this.sumaRepository
+    await this.restaRepository
       .createQueryBuilder()
       .insert()
       .into(Resta)
@@ -61,6 +64,28 @@ export class CalculadoraService {
       .execute();
 
     return resta;
+  }
+
+  async createMulti(multiData: Multiplicacion): Promise<Resta> {
+    const multi = new Multiplicacion();
+
+    const id = uuidv4();
+    const resultado = multiData.n1 * multiData.n2;
+
+    multi.n1 = multiData.n1;
+    multi.n2 = multiData.n2;
+    multi.resultado = resultado;
+
+    await this.multiRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Multiplicacion)
+      .values([
+        { id: id, n1: multiData.n1, n2: multiData.n2, resultado: resultado },
+      ])
+      .execute();
+
+    return multi;
   }
 
   // suma(n1: number, n2: number): string {
