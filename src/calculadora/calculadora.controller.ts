@@ -6,11 +6,7 @@ import { Division, Multiplicacion, Resta, Suma } from './entities';
 export class CalculadoraController {
   constructor(private calculadoraService: CalculadoraService) {}
 
-  // @Post('suma')
-  // sumar(@Body() operacionesDto: OperacionesDto) {
-  //   return this.calculadoraService.suma(operacionesDto);
-  // }
-
+  //BD POSTGRES EN DOCKER
   @Post('suma')
   async createSum(@Body() sumaData: Suma): Promise<Suma> {
     const suma = await this.calculadoraService.createSum(sumaData);
@@ -37,23 +33,25 @@ export class CalculadoraController {
     return divi;
   }
 
-  @Get('obsumas')
-  findAllSum(): number[] {
-    return this.calculadoraService.findSum();
-  }
+  //OBTENER OPERACIONES EN MEMORIA
 
-  @Get('obrestas')
-  findAllRes(): number[] {
-    return this.calculadoraService.findRest();
-  }
+  // @Get('obsumas')
+  // findAllSum(): number[] {
+  //   return this.calculadoraService.findSum();
+  // }
 
-  @Get('obmultiplicaciones')
-  findAllMulti(): number[] {
-    return this.calculadoraService.findMulti();
-  }
+  // @Get('obrestas')
+  // findAllRes(): number[] {
+  //   return this.calculadoraService.findRest();
+  // }
 
-  @Get('obdivisiones')
-  findAllDiv(): number[] {
-    return this.calculadoraService.findDiv();
-  }
+  // @Get('obmultiplicaciones')
+  // findAllMulti(): number[] {
+  //   return this.calculadoraService.findMulti();
+  // }
+
+  // @Get('obdivisiones')
+  // findAllDiv(): number[] {
+  //   return this.calculadoraService.findDiv();
+  // }
 }

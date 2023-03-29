@@ -6,10 +6,10 @@ import { Suma, Resta, Multiplicacion, Division } from './entities';
 
 @Injectable()
 export class CalculadoraService {
-  private readonly resultSumas: number[] = [];
-  private readonly resultRestas: number[] = [];
-  private readonly resultMulti: number[] = [];
-  private readonly resultDivi: number[] = [];
+  // private readonly resultSumas: number[] = [];
+  // private readonly resultRestas: number[] = [];
+  // private readonly resultMulti: number[] = [];
+  // private readonly resultDivi: number[] = [];
 
   constructor(
     @InjectRepository(Suma)
@@ -22,6 +22,7 @@ export class CalculadoraService {
     private diviRepository: Repository<Division>,
   ) {}
 
+  //CONECTANDOSE A UNA BASE DE DATOS POSTGRES EN DOCKER
   async createSum(sumaData: Suma): Promise<Suma> {
     const suma = new Suma();
 
@@ -110,6 +111,8 @@ export class CalculadoraService {
     return divi;
   }
 
+  //PARA TRABAJAR CON DATOS EN MEMORIA
+
   // suma(n1: number, n2: number): string {
   //   const resultado = n1 + n2;
   //   this.resultSumas.push(resultado);
@@ -134,19 +137,19 @@ export class CalculadoraService {
   //   return `Ingresada la division ${n1} / ${n2} al Arreglo. \nConsulta con el metodo GET por ellos`;
   // }
 
-  findSum(): number[] {
-    return this.resultSumas;
-  }
+  // findSum(): number[] {
+  //   return this.resultSumas;
+  // }
 
-  findRest(): number[] {
-    return this.resultRestas;
-  }
+  // findRest(): number[] {
+  //   return this.resultRestas;
+  // }
 
-  findMulti(): number[] {
-    return this.resultMulti;
-  }
+  // findMulti(): number[] {
+  //   return this.resultMulti;
+  // }
 
-  findDiv(): number[] {
-    return this.resultDivi;
-  }
+  // findDiv(): number[] {
+  //   return this.resultDivi;
+  // }
 }
