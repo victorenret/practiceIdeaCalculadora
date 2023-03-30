@@ -36,9 +36,15 @@ export class CalculadoraController {
   //OBTENER REGISTROS DE BASE DE DATOS POSTGRES
 
   @Get('obsumas')
-  async findAllSum() {
+  async findAllSum(): Promise<Suma[]> {
     const sumas = await this.calculadoraService.findAllSum();
     return sumas;
+  }
+
+  @Get('obrestas')
+  async findAllRest(): Promise<Resta[]> {
+    const restas = await this.calculadoraService.findAllRest();
+    return restas;
   }
 
   //OBTENER OPERACIONES EN MEMORIA

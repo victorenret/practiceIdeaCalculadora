@@ -117,6 +117,10 @@ export class CalculadoraService {
     return await this.sumaRepository.find();
   }
 
+  async findAllRest(): Promise<Resta[]> {
+    return await this.restaRepository.find();
+  }
+
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {
