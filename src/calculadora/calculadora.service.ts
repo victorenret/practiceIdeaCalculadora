@@ -117,6 +117,10 @@ export class CalculadoraService {
     return await this.sumaRepository.find();
   }
 
+  async findAllMulti(): Promise<Multiplicacion[]> {
+    return await this.multiRepository.find();
+  }
+
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {

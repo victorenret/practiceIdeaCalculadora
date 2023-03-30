@@ -41,6 +41,12 @@ export class CalculadoraController {
     return sumas;
   }
 
+  @Get('obmultiplicaciones')
+  findAllMulti() {
+    const multip = this.calculadoraService.findAllMulti();
+    return multip;
+  }
+
   //OBTENER OPERACIONES EN MEMORIA
 
   // @Get('obsumas')
