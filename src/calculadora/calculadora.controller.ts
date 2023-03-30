@@ -33,6 +33,14 @@ export class CalculadoraController {
     return divi;
   }
 
+  //OBTENER REGISTROS DE BASE DE DATOS POSTGRES
+
+  @Get('obsumas')
+  async findAllSum() {
+    const sumas = await this.calculadoraService.findAllSum();
+    return sumas;
+  }
+
   //OBTENER OPERACIONES EN MEMORIA
 
   // @Get('obsumas')
