@@ -41,6 +41,11 @@ export class CalculadoraController {
     return sumas;
   }
 
+  @Get('obmultiplicaciones')
+  findAllMulti() {
+    const multip = this.calculadoraService.findAllMulti();
+    return multip;
+    
   @Get('obrestas')
   async findAllRest(): Promise<Resta[]> {
     const restas = await this.calculadoraService.findAllRest();

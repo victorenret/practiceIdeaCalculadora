@@ -117,6 +117,9 @@ export class CalculadoraService {
     return await this.sumaRepository.find();
   }
 
+  async findAllMulti(): Promise<Multiplicacion[]> {
+    return await this.multiRepository.find();
+
   async findAllRest(): Promise<Resta[]> {
     return await this.restaRepository.find();
   }
