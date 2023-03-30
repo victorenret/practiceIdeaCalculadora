@@ -111,6 +111,12 @@ export class CalculadoraService {
     return divi;
   }
 
+  //OBTENIENDO DATOS DE LA BD POSTGRES
+
+  async findAllSum(): Promise<Suma[]> {
+    return await this.sumaRepository.find();
+  }
+
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {
