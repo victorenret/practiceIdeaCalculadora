@@ -46,11 +46,17 @@ export class CalculadoraController {
     const multip = this.calculadoraService.findAllMulti();
     return multip;
   }
-    
+
   @Get('obrestas')
   async findAllRest(): Promise<Resta[]> {
     const restas = await this.calculadoraService.findAllRest();
     return restas;
+  }
+
+  @Get('obdivis')
+  async findAllDivi(): Promise<Division[]> {
+    const divis = await this.calculadoraService.findAllDivis();
+    return divis;
   }
 
   //OBTENER OPERACIONES EN MEMORIA

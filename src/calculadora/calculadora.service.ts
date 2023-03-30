@@ -125,6 +125,10 @@ export class CalculadoraService {
     return await this.restaRepository.find();
   }
 
+  async findAllDivis(): Promise<Division[]> {
+    return await this.diviRepository.find();
+  }
+
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {
