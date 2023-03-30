@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Post} from '@nestjs/common';
 import { CalculadoraService } from './calculadora.service';
 import { Division, Multiplicacion, Resta, Suma } from './entities';
 
@@ -33,7 +33,7 @@ export class CalculadoraController {
     return divi;
   }
 
-  //OBTENER REGISTROS DE BASE DE DATOS POSTGRES
+  //OBTENER TODOS LOS REGISTROS DE BASE DE DATOS POSTGRES
 
   @Get('obsumas')
   async findAllSum(): Promise<Suma[]> {
@@ -58,6 +58,29 @@ export class CalculadoraController {
     const divis = await this.calculadoraService.findAllDivis();
     return divis;
   }
+
+  //OBTENER POR ID PARA TODAS LAS OPERACIONES
+
+  @Get("suma/:id")
+  async getSumaById(@Param('id', ParseUUIDPipe) id: string): Promise<Suma> {
+    return this.calculadoraService.getSumaById(id);
+  }
+
+  @Get("resta/:id")
+  async getRestaById(@Param('id', ParseUUIDPipe) id: string): Promise<Resta> {
+    return this.calculadoraService.getRestaById(id);
+  }
+
+  @Get("multiplicacion/:id")
+  async getMultiById(@Param('id', ParseUUIDPipe) id: string): Promise<Multiplicacion> {
+    return this.calculadoraService.getMultiById(id);
+  }
+
+  @Get("division/:id")
+  async getDivisById(@Param('id', ParseUUIDPipe) id: string): Promise<Division> {
+    return this.calculadoraService.getDivisById(id);
+  }
+
 
   //OBTENER OPERACIONES EN MEMORIA
 

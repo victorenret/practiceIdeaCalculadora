@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, ParseUUIDPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { FindOneOptions, Repository } from 'typeorm';
+import { v4 as uuidv4, validate as isUUID } from 'uuid';
 import { Suma, Resta, Multiplicacion, Division } from './entities';
 
 @Injectable()
@@ -111,7 +111,7 @@ export class CalculadoraService {
     return divi;
   }
 
-  //OBTENIENDO DATOS DE LA BD POSTGRES
+  //OBTENIENDO TODOS LOS DATOS DE LA BD POSTGRES
 
   async findAllSum(): Promise<Suma[]> {
     return await this.sumaRepository.find();
@@ -129,6 +129,40 @@ export class CalculadoraService {
     return await this.diviRepository.find();
   }
 
+  //OBTENIENDO POR ID TODAS LAS OPERACIONES
+
+  async getSumaById(id: string): Promise<Suma> {
+    const suma = await this.sumaRepository.findOne({ where: { id } });
+    if (!suma) {
+      throw new NotFoundException(`La suma con id ${id} no existe.`);
+    }
+    return suma;
+  }
+
+  async getRestaById(id: string): Promise<Resta> {
+    const resta = await this.restaRepository.findOne({ where: { id } });
+    if (!resta) {
+      throw new NotFoundException(`La resta con id ${id} no existe.`);
+    }
+    return resta;
+  }
+
+  async getMultiById(id: string): Promise<Multiplicacion> {
+    const multi = await this.multiRepository.findOne({ where: { id } });
+    if (!multi) {
+      throw new NotFoundException(`La multiplicacion con id ${id} no existe.`);
+    }
+    return multi;
+  }
+
+  async getDivisById(id: string): Promise<Division> {
+    const divis = await this.diviRepository.findOne({ where: { id } });
+    if (!divis) {
+      throw new NotFoundException(`La division con id ${id} no existe.`);
+    }
+    return divis;
+  }
+  
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {
