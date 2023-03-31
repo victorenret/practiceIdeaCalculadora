@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Post} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+} from '@nestjs/common';
 import { CalculadoraService } from './calculadora.service';
 import { Division, Multiplicacion, Resta, Suma } from './entities';
 
@@ -61,26 +69,51 @@ export class CalculadoraController {
 
   //OBTENER POR ID PARA TODAS LAS OPERACIONES
 
-  @Get("suma/:id")
+  @Get('suma/:id')
   async getSumaById(@Param('id', ParseUUIDPipe) id: string): Promise<Suma> {
     return this.calculadoraService.getSumaById(id);
   }
 
-  @Get("resta/:id")
+  @Get('resta/:id')
   async getRestaById(@Param('id', ParseUUIDPipe) id: string): Promise<Resta> {
     return this.calculadoraService.getRestaById(id);
   }
 
-  @Get("multiplicacion/:id")
-  async getMultiById(@Param('id', ParseUUIDPipe) id: string): Promise<Multiplicacion> {
+  @Get('multiplicacion/:id')
+  async getMultiById(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<Multiplicacion> {
     return this.calculadoraService.getMultiById(id);
   }
 
-  @Get("division/:id")
-  async getDivisById(@Param('id', ParseUUIDPipe) id: string): Promise<Division> {
+  @Get('division/:id')
+  async getDivisById(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<Division> {
     return this.calculadoraService.getDivisById(id);
   }
 
+  //ELIMINAR POR ID
+
+  @Delete('suma/:id')
+  async deleteSumForId(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.calculadoraService.deleteSum(id);
+  }
+
+  @Delete('resta/:id')
+  async deleteResForId(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.calculadoraService.deleteRest(id);
+  }
+
+  @Delete('multiplicacion/:id')
+  async deleteMultiForId(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.calculadoraService.deleteMulti(id);
+  }
+
+  @Delete('division/:id')
+  async deleteDiviForId(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.calculadoraService.deleteDivi(id);
+  }
 
   //OBTENER OPERACIONES EN MEMORIA
 

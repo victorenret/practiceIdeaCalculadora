@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException, ParseUUIDPipe } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
-import { v4 as uuidv4, validate as isUUID } from 'uuid';
+import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 import { Suma, Resta, Multiplicacion, Division } from './entities';
 
 @Injectable()
@@ -162,7 +162,33 @@ export class CalculadoraService {
     }
     return divis;
   }
-  
+
+  //PARA ELIMINAR DATOS
+
+  async deleteSum(id: string) {
+    const sum = await this.getSumaById(id);
+    await this.sumaRepository.remove(sum);
+    return `addition with id ${id} was removed`;
+  }
+
+  async deleteRest(id: string) {
+    const rest = await this.getRestaById(id);
+    await this.restaRepository.remove(rest);
+    return `subtraction with id ${id} was removed`;
+  }
+
+  async deleteMulti(id: string) {
+    const multi = await this.getMultiById(id);
+    await this.multiRepository.remove(multi);
+    return `multiplication with id ${id} was removed`;
+  }
+
+  async deleteDivi(id: string) {
+    const divis = await this.getDivisById(id);
+    await this.diviRepository.remove(divis);
+    return `division with id ${id} was removed`;
+  }
+
   //PARA TRABAJAR CON DATOS EN MEMORIA
 
   // suma(n1: number, n2: number): string {
